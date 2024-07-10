@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}">Корзина</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Miit store</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/">Главная</a>
+        <a class="p-2 text-dark" href="/store">Каталог</a>
+        <a class="p-2 text-dark" href="/bu">Корзина</a>
+    </nav>
+    <a class="btn btn-outline-primary" href="#">Sign up</a>
+</div>
+
+<div class="container">
+    <h1 th:text="${title}">Корзина</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+        </tr>
+        </thead>
+        <tbody id="cartItemsTable">
+        <!-- Товары будут добавляться здесь с помощью JavaScript -->
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <h3>Итого к оплате: <span id="totalPrice">0.00</span> ₽</h3>
+        <button id="checkoutButton" class="btn btn-primary">Оформить заказ</button>
+    </div>
+</div>
+
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+    </div>
+</footer>
+
+<script type="text/javascript">
+    function loadCartItems() {
+        var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        var cartItemsTable = document.getElementById('cartItemsTable');
+        var totalPrice = 0;
+
+        cartItems.forEach(function(item) {
+            var row = document.createElement('tr');
+            row.setAttribute('data-id', item.id);
+
+            var nameCell = document.createElement('td');
+            nameCell.textContent = item.name;
+            row.appendChild(nameCell);
+
+            var priceCell = document.createElement('td');
+            priceCell.textContent = item.price;
+            row.appendChild(priceCell);
+
+            var quantityCell = document.createElement('td');
+            var quantityInput = document.createElement('input');
+            quantityInput.type = 'number';
+            quantityInput.min = '0';
+            quantityInput.value = item.quantity;
+            quantityInput.onchange = function() {
+                updateTotalPrice();
+            };
+            quantityCell.appendChild(quantityInput);
+            row.appendChild(quantityCell);
+
+            var sumCell = document.createElement('td');
+            sumCell.textContent = (item.price * item.quantity).toFixed(2);
+            row.appendChild(sumCell);
+
+            cartItemsTable.appendChild(row);
+
+            totalPrice += parseFloat(item.price) * item.quantity;
+        });
+
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+    }
+
+    function updateTotalPrice() {
+        var cartItemsTable = document.getElementById('cartItemsTable');
+        var rows = cartItemsTable.getElementsByTagName('tr');
+        var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        var totalPrice = 0;
+
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var priceCell = row.getElementsByTagName('td')[1];
+            var quantityInput = row.getElementsByTagName('input')[0];
+            var sumCell = row.getElementsByTagName('td')[3];
+
+            var price = parseFloat(priceCell.textContent);
+            var quantity = parseInt(quantityInput.value);
+
+            if (quantity === 0) {
+                var productId = row.getAttribute('data-id');
+                cartItems = cartItems.filter(item => item.id !== productId);
+                row.remove();
+                i--; // Decrement index to account for removed row
+            } else {
+                var sum = price * quantity;
+                sumCell.textContent = sum.toFixed(2);
+
+                // Update quantity in localStorage
+                var itemIndex = cartItems.findIndex(item => item.id === row.getAttribute('data-id'));
+                if (itemIndex !== -1) {
+                    cartItems[itemIndex].quantity = quantity;
+                }
+
+                totalPrice += sum;
+            }
+        }
+
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+
+    document.getElementById('checkoutButton').addEventListener('click', function() {
+        var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        var cartSummary = "Ваш заказ:\n\n";
+        var totalPrice = 0;
+
+        cartItems.forEach(function(item) {
+            var quantity = document.querySelector(`tr[data-id='${item.id}'] input`).value;
+            if (quantity > 0) {
+                var sum = item.price * quantity;
+                cartSummary += `${item.name} - ${item.price} ₽ x ${quantity} = ${sum.toFixed(2)} ₽\n`;
+                totalPrice += sum;
+            }
+        });
+
+        cartSummary += `\nИтого к оплате: ${totalPrice.toFixed(2)} ₽`;
+        alert(cartSummary);
+    });
+
+    // Загрузка товаров при загрузке страницы
+    window.onload = loadCartItems;
+</script>
+
+</body>
+</html>

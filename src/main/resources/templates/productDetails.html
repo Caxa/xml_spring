@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Product Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Miit store</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/">Главная</a>
+        <a class="p-2 text-dark" href="/store">Каталог</a>
+        <a class="p-2 text-dark" href="/bu">Корзина</a>
+    </nav>
+    <a class="btn btn-outline-primary" href="#">Sign up</a>
+</div>
+
+<div class="container">
+    <h1 th:text="${title}">Product Details</h1>
+    <img th:src="${image}" alt="Product Image" width="300">
+    <p th:text="${description}">Description: Default description.</p>
+    <p th:text="'Category: ' + ${category}">Category: Default category.</p>
+    <p th:text="'Price: ₽' + ${price}">Price: ₽0.00</p>
+
+    <form id="addToCartForm">
+        <input type="hidden" name="productId" th:value="${id}">
+        <input type="hidden" name="productName" th:value="${title}">
+        <input type="hidden" name="productPrice" th:value="${price}">
+        <button type="submit">Add to Cart</button>
+    </form>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#addToCartForm').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var productId = $('[name="productId"]').val();
+            var productName = $('[name="productName"]').val();
+            var productPrice = parseFloat($('[name="productPrice"]').val());
+
+            var cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            var existingItem = cartItems.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            alert('Товар добавлен в корзину!');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clothes>
+    <item>
+        <id>1</id>
+        <name>Футболка</name>
+        <price>999</price>
+        <category>Верхняя одежда</category>
+        <image>https://optim.tildacdn.com/stor3033-3736-4637-b739-356433393037/-/resize/746x/-/format/webp/92016285.png</image>
+        <description>Классическая футболка с короткими рукавами. Идеально подходит для повседневного использования.</description>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Худи</name>
+        <price>1499</price>
+        <category>Верхняя одежда</category>
+        <image>https://optim.tildacdn.com/stor6330-3138-4438-b666-656231313762/-/resize/746x/-/format/webp/36523118.png</image>
+        <description>Стильное худи для уютных вечеров. Подходит как для спорта, так и для повседневной носки.</description>
+    </item>
+    <item>
+        <id>3</id>
+        <name>Свитшот</name>
+        <price>1299</price>
+        <category>Верхняя одежда</category>
+        <image>https://optim.tildacdn.com/stor6664-3130-4731-b332-333863326233/-/resize/746x/-/format/webp/63952243.png</image>
+        <description>Удобный свитшот для прохладных дней. Идеально сочетается с джинсами или спортивными штанами.</description>
+    </item>
+</clothes>

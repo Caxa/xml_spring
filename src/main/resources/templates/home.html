@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: white; /* Белый цвет фона */
+            padding: 10px; /* Внутренний отступ */
+        }
+        .center {
+            text-align: center;
+            margin-top: 40vh;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Miit store</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/">Главная</a>
+        <a class="p-2 text-dark" href="/store">Каталог</a>
+        <a class="p-2 text-dark" href="/bu">Корзина</a>
+    </nav>
+    <a class="btn btn-outline-primary" href="#">Sign up</a>
+</div>
+
+<div class="center">
+    <h1>Официальный магазин Рут Миит</h1>
+    <p>Магазин университета - официальный магазин, расположенный по адресу: улица Образцова, дом 9с9, в университетском кампусе. В магазине представлены товары с символикой университета, такие как одежда, письменные принадлежности и другие предметы, связанные с университетской тематикой. График работы магазина, контактная информация и ассортимент товаров делают его удобным местом для приобретения сувениров и предметов, связанных с университетской жизнью.</p>
+</div>
+
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: white; /* Белый цвет фона */
+            padding: 10px; /* Внутренний отступ */
+        }
+        .center {
+            text-align: center;
+            margin-top: 40vh;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Miit store</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/">Главная</a>
+        <a class="p-2 text-dark" href="/store">Каталог</a>
+        <a class="p-2 text-dark" href="/bu">Корзина</a>
+    </nav>
+    <a class="btn btn-outline-primary" href="#">Sign up</a>
+</div>
+
+<div class="center">
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <a href="http://localhost:8081/product?id=3" style="text-decoration: none; color: inherit;">
+                        <div class="card shadow-sm">
+                            <img src="https://optim.tildacdn.com/stor6664-3130-4731-b332-333863326233/-/resize/746x/-/format/webp/63952243.png" class="card-img-top" alt="Описание изображения">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-body-secondary"><span>&#8381;</span> 1299</small> <!-- Цена с значком рубля -->
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col">
+                    <a href="http://localhost:8081/product?id=1" style="text-decoration: none; color: inherit;">
+                        <div class="card shadow-sm">
+                            <img src="https://optim.tildacdn.com/stor3033-3736-4637-b739-356433393037/-/resize/746x/-/format/webp/92016285.png" class="card-img-top" alt="Описание изображения">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-body-secondary"><span>&#8381;</span> 999</small> <!-- Цена с значком рубля -->
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="row">
+
+                    <div class="col">
+                        <a href="http://localhost:8081/product?id=2" style="text-decoration: none; color: inherit;">
+                            <div class="card shadow-sm">
+                                <img src="https://optim.tildacdn.com/stor6330-3138-4438-b666-656231313762/-/resize/746x/-/format/webp/36523118.png" class="card-img-top" alt="Описание второго изображения">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-body-secondary"><span>&#8381;</span> 1499</small> <!-- Цена с значком рубля -->
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="mastfoot mt-auto">
+    <div class="inner">
+        <p>&copy; 2024 My Website. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
